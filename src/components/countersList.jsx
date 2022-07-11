@@ -12,6 +12,25 @@ const CountersList = () => {
 
     const [counters, setCounters] = useState(initialState);
     
+    const handleIncrement = (id) => {
+        const newCounters = counters.map((counter) => {
+            if (counter.id === id) {
+                counter.value += 1
+            }
+            return counter;
+        })
+        setCounters(newCounters)
+    }
+
+    const handleDecrement = (id) => {
+        const newCounters = counters.map((counter) => {
+            if (counter.id === id) {
+                counter.value -= 1
+            }
+            return counter;
+        })
+        setCounters(newCounters)
+    }
     
     const handleDelete = (id) => {
         const newCounters = counters.filter((counter => counter.id !== id));
@@ -29,6 +48,8 @@ const CountersList = () => {
                 <Counter 
                     key={count.id} 
                     onDelete = {handleDelete}
+                    onIncrement = {handleIncrement}
+                    onDecrement = {handleDecrement}
                     {...count}
                     />
             ))}
